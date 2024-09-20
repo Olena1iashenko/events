@@ -1,18 +1,6 @@
-import { useEffect, useState } from "react";
-import { fetchParticipants } from "../../services/app";
+import { Link } from "react-router-dom";
 
 const Event = ({ event }) => {
-  const [participants, setParticipants] = useState([]);
-
-  const getParticipants = async (eventId) => {
-    try {
-      const { participants } = await fetchParticipants(eventId);
-      setParticipants(participants);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <li
       style={{
@@ -25,8 +13,6 @@ const Event = ({ event }) => {
     >
       <h2>{event.title}</h2>
       <p>{event.description}</p>
-      {/* <p>Date: {new Date(event.eventDate).toLocaleDateString()}</p>
-      <p>Organizer: {event.organizer}</p> */}
       <div
         style={{
           padding: "0 30px",
@@ -34,15 +20,12 @@ const Event = ({ event }) => {
           justifyContent: "space-between",
         }}
       >
-        <button
-          type="button"
-          onClick={() => {
-            getParticipants(event._id);
-          }}
-        >
-          View
-        </button>
-        <button type="button">Register</button>
+        <Link to={`/events/${event._id}/participants`}>
+          <button type="button">View</button>
+        </Link>
+        <Link to={`/events/${event._id}/registration`}>
+          <button type="button">Register</button>
+        </Link>
       </div>
     </li>
   );

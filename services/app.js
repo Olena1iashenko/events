@@ -7,12 +7,15 @@ export const fetchEvents = async () => {
   return data;
 };
 
-export const fetchParticipants = async () => {
-  const response = await axios.get("participants");
-  return response.data;
+export const addNewParticipantToEvent = async (eventId, participantData) => {
+  const { data } = await axios.post(
+    `/events/${eventId}/participants`,
+    participantData
+  );
+  return data;
 };
 
-export const addNewParticipant = async (body) => {
-  const response = await axios.post("participants", body);
-  return response.data;
+export const fetchEventParticipants = async (eventId) => {
+  const { data } = await axios.get(`/events/${eventId}/participants`);
+  return data;
 };
