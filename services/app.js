@@ -2,8 +2,18 @@ import axios from "axios";
 
 axios.defaults.baseURL = "http://localhost:3000/";
 
-export const fetchEvents = async () => {
-  const { data } = await axios.get("events");
+export const fetchEvents = async (configParams) => {
+  const { data } = await axios.get("events", {
+    params: {
+      limit: 8,
+      ...configParams,
+    },
+  });
+  return data;
+};
+
+export const fetchEventById = async (eventId) => {
+  const { data } = await axios.get(`/events/${eventId}`);
   return data;
 };
 

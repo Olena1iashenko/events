@@ -9,7 +9,6 @@ const Event = ({ event }) => {
         padding: "16px",
         boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
       }}
-      key={event._id}
     >
       <h2>{event.title}</h2>
       <p>{event.description}</p>

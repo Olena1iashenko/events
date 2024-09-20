@@ -23,7 +23,6 @@ const RegistrationPage = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Дані учасника
     const participantData = {
       fullName: formData.fullName,
       email: formData.email,
@@ -33,12 +32,10 @@ const RegistrationPage = () => {
     };
 
     try {
-      // Додаємо учасника до події через API
       const updatedEvent = await addNewParticipantToEvent(
         eventId,
         participantData
       );
-
       alert("Participant successfully registered!");
       navigate("/");
 
@@ -52,7 +49,7 @@ const RegistrationPage = () => {
     <div>
       <h1>Event registration</h1>
       <form
-        style={{ display: "flex", gap: "10px", flexDirection: "column" }}
+        style={{ display: "flex", gap: "5px", flexDirection: "column" }}
         onSubmit={handleSubmit}
       >
         <label htmlFor="fullName">Full name</label>
@@ -85,8 +82,13 @@ const RegistrationPage = () => {
           onChange={handleChange}
         />
 
-        <label>Where did you hear about this event?</label>
-        <div>
+        <p>Where did you hear about this event?</p>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
           <label>
             <input
               type="radio"
@@ -122,10 +124,18 @@ const RegistrationPage = () => {
           </label>
         </div>
 
-        <button type="submit">Register</button>
-        <Link to={`/`}>
-          <button type="button">Cancel</button>
-        </Link>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-around",
+            marginTop: "20px",
+          }}
+        >
+          <button type="submit">Register</button>
+          <Link to={`/`}>
+            <button type="button">Cancel</button>
+          </Link>
+        </div>
       </form>
     </div>
   );
