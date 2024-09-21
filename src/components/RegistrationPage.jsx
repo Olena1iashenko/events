@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { addNewParticipantToEvent } from "../../services/app";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const RegistrationPage = () => {
   const { eventId } = useParams();
@@ -17,6 +19,13 @@ const RegistrationPage = () => {
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  const handleDateChange = (date) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      dateOfBirth: date,
     }));
   };
 
@@ -72,14 +81,13 @@ const RegistrationPage = () => {
           onChange={handleChange}
         />
 
-        <label htmlFor="dateOfBirth">Date of birth</label>
-        <input
-          type="date"
-          id="dateOfBirth"
-          name="dateOfBirth"
+        <label htmlFor="dateOfBirth">Date of Birth</label>
+        <DatePicker
+          selected={formData.dateOfBirth}
+          onChange={handleDateChange}
+          dateFormat="dd-MM-yyyy"
+          placeholderText="Select date"
           required
-          value={formData.dateOfBirth}
-          onChange={handleChange}
         />
 
         <p>Where did you hear about this event?</p>
