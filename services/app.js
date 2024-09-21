@@ -25,7 +25,9 @@ export const addNewParticipantToEvent = async (eventId, participantData) => {
   return data;
 };
 
-export const fetchEventParticipants = async (eventId) => {
-  const { data } = await axios.get(`/events/${eventId}/participants`);
+export const fetchEventParticipants = async (eventId, query) => {
+  const { data } = await axios.get(`/events/${eventId}/participants/search`, {
+    params: { query },
+  });
   return data;
 };

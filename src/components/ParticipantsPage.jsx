@@ -7,11 +7,12 @@ const ParticipantsPage = () => {
   const [participants, setParticipants] = useState([]);
   const [event, setEvent] = useState({});
   const { eventId } = useParams();
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const getParticipants = async () => {
       try {
-        const response = await fetchEventParticipants(eventId);
+        const response = await fetchEventParticipants(eventId, searchQuery);
         setParticipants(response);
       } catch (error) {
         console.log(error);
@@ -34,6 +35,12 @@ const ParticipantsPage = () => {
     getEvent();
   }, []);
 
+  const handleSearch = async () => {
+    const response = await fetchEventParticipants(eventId, searchQuery);
+    setParticipants(response);
+    setSearchQuery("");
+  };
+
   return (
     <>
       <h1
@@ -43,6 +50,18 @@ const ParticipantsPage = () => {
       >
         "{event.title}" participants
       </h1>
+
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search by name or email"
+        style={{
+          margin: "10px 30px",
+          width: "300px",
+        }}
+      />
+      <button onClick={handleSearch}>Search</button>
 
       {participants.length > 0 ? (
         <ul
