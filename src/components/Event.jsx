@@ -12,6 +12,8 @@ const Event = ({ event }) => {
     >
       <h2>{event.title}</h2>
       <p>{event.description}</p>
+      <p>Event date: {new Date(event.eventDate).toLocaleDateString("en-US")}</p>
+      <p>Organizer: {event.organizer}</p>
       <div
         style={{
           padding: "0 30px",

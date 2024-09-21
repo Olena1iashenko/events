@@ -5,7 +5,7 @@ axios.defaults.baseURL = "http://localhost:3000/";
 export const fetchEvents = async (configParams) => {
   const { data } = await axios.get("events", {
     params: {
-      limit: 8,
+      limit: 6,
       ...configParams,
     },
   });
